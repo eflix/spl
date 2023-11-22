@@ -48,9 +48,17 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url('assets'); ?>/js/sb-admin-2.min.js"></script>
+    <script src="<?= base_url('assets'); ?>/js/select2.min.js"></script>
 
     <!-- rubah role -->
     <script>
+        $('#locn').select2();
+        $('#sLocn').select2();
+
+        $('#nama').select2({
+            tags: true
+        });
+
        $('.custom-file-input').on('change', function(){
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
@@ -77,7 +85,7 @@
     </script>
 
     <!-- Cetak Surat nik editing done -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         document.getElementById('nik').addEventListener('change', function() {
           console.log('You selected: ', this.value);
 
@@ -104,7 +112,7 @@
             });
 
         });
-    </script>
+    </script> -->
 
 
     <script type="text/javascript">

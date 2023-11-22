@@ -10,20 +10,20 @@
         	<div class="row">
         		<div class="col-sm-1">
         			<div class="form-group">
+						<!-- <?php var_dump($laundry); ?> -->
 		                <label for="tanggal">Cabang</label>
 		            </div>
 	        	</div>
 	        	<div class="col-sm-4">
 	        		<div class="form-group">
-		      		<input type="text" class="form-control form-control-sm" value="<?= set_value('locn') ?>" id="locn" name="locn" list="listLocn" placeholder="Pilih Cabang">
-
-						              <datalist id="listLocn">
-						                <?php foreach ($laundry as $ln) : ?>
-						                  <option value="<?= $ln['ld_id'] ?>"><?= $ln['ld_id'] . '-' . $ln['ld_nama']; ?></option>
-						                <?php endforeach; ?>
-						              </datalist>
-		      	</div>
-	        	</div>
+						<select class="form-control" name="locn" id="locn">
+							<option value=""></option>
+							<?php foreach ($laundry as $ln) : ?>
+								<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+							<?php endforeach; ?>
+						</select>
+		      		</div>
+				</div>
 	        </div>
 
           <div class="row">
@@ -64,13 +64,12 @@
 
         	<div class="col-sm-4">
         		<div class="form-group">
-                 <input type="text" class="form-control form-control-sm" id="nama" name="nama" placeholder="masukan nama" list="listCust">
-
-                 <datalist id="listCust">
-						                <?php foreach ($customer as $cust) : ?>
-						                  <option value="<?= $cust['cust_id'] ?>"><?= $cust['cust_id'] . '-' . $cust['cust_nama']; ?></option>
+				<select class="form-control" name="nama" id="nama">
+							<option value=""></option>
+							<?php foreach ($customer as $cust) : ?>
+						                  <option value="<?= $cust['cust_id'] ?>"><?= $cust['cust_nama']; ?></option>
 						                <?php endforeach; ?>
-						              </datalist>
+						</select>
 		      	</div>
 
 		      	<div class="form-group">
@@ -99,7 +98,7 @@
 
 		  	<div class="col-sm-12">
 		  		<button type="submit" class="btn btn-primary">Tambah</button>
-        <a href="<?= base_url('kependudukan'); ?>" class="btn btn-danger">Kembali</a>
+        <!-- <a href="<?= base_url('kependudukan'); ?>" class="btn btn-danger">Kembali</a> -->
 		  	</div>
 		  	</div>
             </form>
@@ -109,15 +108,12 @@
 							<form action="" method="post">
 								<div class="input-group">
 
-									<input type="text" class="form-control form-control-sm" id="sLocn" name="sLocn" list="listLocn" placeholder="pilih Cabang" value="<?php if(!empty($_POST['locn'])) {
-										echo $_POST['locn'];
-									} ?>">
-
-						              <datalist id="listLocn">
-						                <?php foreach ($locn as $ln) : ?>
-						                  <option value="<?= $ln['fin_inv_locn'] ?>"><?= $ln['fin_inv_locn']; ?></option>
-						                <?php endforeach; ?>
-						              </datalist>
+								<select class="form-control" name="sLocn" id="sLocn">
+							<option value=""></option>
+							<?php foreach ($laundry as $ln) : ?>
+								<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+							<?php endforeach; ?>
+						</select>
 
 									<input type="date" class="form-control form-control-sm" name="startDt" style="width:-10%" value="<?= date('Y-m-d') ?>">
 									<input type="date" class="form-control form-control-sm" name="endDt" value="<?= date('Y-m-d') ?>">
@@ -175,3 +171,7 @@
     <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
+
+<script>
+	//  $('#locn').select2();
+</script>
