@@ -17,7 +17,7 @@
             <div class="col-sm-3">
               <div class="form-group form-inline">
                 <label for="cb1">Laundry</label>
-                 <input type="text" class="form-control form-control-sm" id="laundry1" name="laundry1" list="listLaundry">
+                 <input type="text" class="form-control form-control-sm ml-2" id="laundry1" name="laundry1" list="listLaundry">
 
               <datalist id="listLaundry">
                 <?php foreach ($laundry as $ln) : ?>
@@ -29,9 +29,9 @@
             <div class="col-sm-5">
                     <div class="form-group form-inline">
                       <label for="cb1">Dari</label>
-                    <input type="date" class="form-control form-control-sm" name="startDt1" style="width:-10%">
-                    <label for="cb1">Ke</label>
-                        <input type="date" class="form-control form-control-sm" name="endDt1">
+                    <input type="date" class="form-control form-control-sm ml-2" name="startDt1" style="width:-10%">
+                    <label class="ml-3" for="cb1">Ke</label>
+                        <input type="date" class="form-control form-control-sm ml-2" name="endDt1">
                     </div>
             </div>
           </div>
@@ -45,34 +45,34 @@
                 </div>
             </div>
 
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                     <div class="form-group form-inline">
                       <label for="dari">Dari</label>
-                    <input type="date" class="form-control form-control-sm" name="startDt2" style="width:-10%" value="<?= date('Y-m-d') ?>">
-                    <label for="ke">Ke</label>
-                        <input type="date" class="form-control form-control-sm" name="endDt2" value="<?= date('Y-m-d') ?>">
+                    <input type="date" class="form-control form-control-sm ml-2" name="startDt2" style="width:-10%" value="<?= date('Y-m-d') ?>">
+                    <label class="ml-2" for="ke">Ke</label>
+                        <input type="date" class="form-control form-control-sm ml-2" name="endDt2" value="<?= date('Y-m-d') ?>">
                     </div>
             </div>
 
             
 
-            <div class="col-sm-5">
+            <div class="col-sm-2">
               <div class="form-group form-inline">
                 <label>By</label>
-                 <select class="form-control" id="cbBy2" name="cbBy2">
+                 <select class="form-control ml-2" id="cbBy2" name="cbBy2">
                   <option>laundry</option>
                   <option>tanggal</option>
                  </select>
             </div>
             </div>
 
-            <div class="col-sm-2">
-            </div>
+            <!-- <div class="col-sm-2">
+            </div> -->
 
-            <div class="col-sm-5">
+            <div class="col-sm-4">
               <div class="form-group form-inline">
                 <label for="cb1">Laundry</label>
-                 <input type="text" class="form-control form-control-sm" id="laundry2" name="laundry2" list="listLaundry">
+                 <input type="text" class="form-control form-control-sm ml-2" id="laundry2" name="laundry2" list="listLaundry">
 
               <datalist id="listLaundry">
                 <?php foreach ($laundry as $ln) : ?>
@@ -92,19 +92,19 @@
                   <label for="cb3">Laporan Hsl Gosok</label>
                 </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                     <div class="form-group form-inline">
                       <label for="dari3">Dari</label>
-                    <input type="date" class="form-control form-control-sm" name="startDt3" style="width:-10%" value="<?= date('Y-m-d') ?>">
-                    <label for="ke3">Ke</label>
-                        <input type="date" class="form-control form-control-sm" name="endDt3" value="<?= date('Y-m-d') ?>">
+                    <input type="date" class="form-control form-control-sm ml-2" name="startDt3" style="width:-10%" value="<?= date('Y-m-d') ?>">
+                    <label class="ml-2" for="ke3">Ke</label>
+                        <input type="date" class="form-control form-control-sm ml-2" name="endDt3" value="<?= date('Y-m-d') ?>">
                     </div>
             </div>
             
             <div class="col-sm-3">
-              <div class="form-group">
+              <div class="form-group form-inline">
                 <label for="cb1">Laundry</label>
-                 <input type="text" class="form-control form-control-sm" id="laundry3" name="laundry3" list="listLaundry">
+                 <input type="text" class="form-control form-control-sm ml-2" id="laundry3" name="laundry3" list="listLaundry">
 
               <datalist id="listLaundry">
                 <?php foreach ($laundry as $ln) : ?>
