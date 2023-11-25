@@ -7,18 +7,26 @@ class Invoice_model extends CI_Model {
 		return $query = $this->db->get_where('fin_invoice',['fin_inv_dt >= ' => date('Y-m-d'), 'fin_inv_dt <= ' => date('Y-m-d')])->result_array();
 	}
 
-	public function getInvoiceByParams(){
-		// $this->db->where('fin_inv_dt >=', date('Y-m-d', strtotime($this->input->post('starDt'))));
-		// $this->db->where('fin_inv_dt <=', date('Y-m-d', strtotime($this->input->post('endDt'))));
+	public function getInvoiceByParams($start_date,$end_date,$locn,$pelanggan){
 
-		// if ($this->input->post('keywoard')) {
-		// 	$this->db->like('fin_inv_cust_name',$this->input->post('keywoard'));
-		// $this->db->or_like('fin_inv_city',$this->input->post('keywoard'));
+		$paramLocn = "";
+		$paramPelanggan = "";
+
+		if ($locn != '' || $locn = null) {
+			$paramLocn = " and fin_inv_locn = '$locn'";
+		}
+
+		// if ($pelanggan <> '') {
+		// 	$paramPelanggan = " and fin_inv_locn = $pelanggan";
 		// }
-		
-		return $this->db->get('fin_invoice')->result_array();
 
-		// return $query = $this->db->get_where('fin_invoice',['fin_inv_dt >= ' => date('Y-m-d', strtotime($this->input->post('starDt'))), 'fin_inv_dt <= ' => date('Y-m-d', strtotime($this->input->post('endDt')))])->result_array();
+		$query = "select * from fin_invoice
+					where fin_inv_dt >= '$start_date' and fin_inv_dt <= '$end_date' $paramLocn ";
+
+		return $this->db->query($query)->result_array();
+		
+		// return $this->db->get_where('fin_invoice',['fin_inv_dt >= ' => $start_date, 'fin_inv_dt <= ' => $end_date])->result_array();
+
 	}
 
 	public function addInvoice(){

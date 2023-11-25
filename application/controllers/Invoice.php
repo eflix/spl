@@ -10,36 +10,36 @@ class Invoice extends CI_Controller {
 		$this->load->model('MasterData_model','master');
 	}
 
-	public function index($startDt='',$endDt=''){
+	public function index(){
 		$data['title'] = 'Penghasilan';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
 		$data['startDt'] = date('Y-m-d');
-		$data['endDt'] =  date('d/m/Y');
+		$data['endDt'] =  date('Y-m-d');
 
-		$data['invoice'] = $this->invoice->getAllData();
+		// $data['invoice'] = $this->invoice->getAllData();
 		$data['locn'] = $this->invoice->getLocn();
 		$data['laundry'] = $this->master->getAllLaundry();
 		$data['customer'] = $this->master->getAllCustomer();
-		// var_dump($data['locn']);
 
 		if ($this->input->post('startDt')) {
-			// echo "by param";
-			$data['invoice'] = $this->invoice->getInvoiceByParams();
+			$data['startDt'] = date_format(date_create($this->input->post('startDt')),'Y-m-d');
+			$data['endDt'] = date_format(date_create($this->input->post('endDt')),'Y-m-d');
 		}
 
-		
-		// var_dump($data['invoice']);
-		// echo $data['startDt'];
+		$data['locn'] = $this->input->post('sLocn');
+		$data['pelanggan'] = $this->input->post('keyword');
 
+		$data['invoice'] = $this->invoice->getInvoiceByParams($data['startDt'],$data['endDt'],$data['locn'],$data['pelanggan']);
+		
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		
 		if ($this->form_validation->run() == false) {
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/sidebar', $data);
-		$this->load->view('templates/topbar', $data);
-		$this->load->view('invoice/index', $data);
-		$this->load->view('templates/footer');
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('invoice/index', $data);
+			$this->load->view('templates/footer');
 		} else {
 			// echo "insert";
 			$this->invoice->addInvoice();
