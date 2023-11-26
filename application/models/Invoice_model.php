@@ -94,4 +94,18 @@ class Invoice_model extends CI_Model {
 		$this->db->insert('hasil_gosok',$data);
 	}
 
+	public function getAllHasilGosokbyParam($start_date,$end_date,$locn){
+		$paramLocn = "";
+		$paramPelanggan = "";
+
+		if ($locn != '' || $locn = null) {
+			$paramLocn = " and hg_ld_id = '$locn'";
+		}
+
+		$query = "select * from hasil_gosok 
+		where hg_tgl >= '$start_date' and hg_tgl <= '$end_date' $paramLocn";
+
+		return $this->db->query($query)->result_array();
+	}
+
 }

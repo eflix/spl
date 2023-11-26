@@ -107,10 +107,25 @@ class Invoice extends CI_Controller {
 		$data['title'] = 'Hasil Gosok';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
+		$data['startDt'] = date('Y-m-d');
+		$data['endDt'] =  date('Y-m-d');
+
+		if ($this->input->post('startDt')) {
+			$data['startDt'] = date_format(date_create($this->input->post('startDt')),'Y-m-d');
+			$data['endDt'] = date_format(date_create($this->input->post('endDt')),'Y-m-d');
+		}
+
+		if ($this->input->post('sLocn')) {
+			$data['locn'] = $this->input->post('sLocn');
+		} else {
+			$data['locn'] = '';
+		}
+
 		$data['laundry'] = $this->master->getAllLaundry();
 		$data['customer'] = $this->master->getAllCustomer();
+		$data['tukang_gosok'] = $this->master->getAllTukangGosok();
 
-		$data['hasilGosok'] = $this->invoice->getAllHasilGosok();
+		$data['hasilGosok'] = $this->invoice->getAllHasilGosokbyParam($data['startDt'],$data['endDt'],$data['locn']);
 
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
 		
@@ -124,6 +139,12 @@ class Invoice extends CI_Controller {
 			$this->invoice->addHasilGosok();
 			redirect('invoice/hasilGosok');
 		}
+	}
+
+	public function hapusHG($id){
+		$this->db->delete('hasil_gosok',['hg_id' => $id]);
+
+		redirect('invoice/hasilGosok');
 	}
 
 }

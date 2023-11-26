@@ -22,14 +22,20 @@
 		      	
 
 		      	<div class="form-group">
-                 <input type="text" class="form-control form-control-sm" id="laundry" name="laundry" list="listLaundry">
+				  <select class="form-control" name="laundry" id="laundry">
+							<option value=""></option>
+							<?php foreach ($laundry as $ln) : ?>
+								<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+							<?php endforeach; ?>
+						</select>
+                 <!-- <input type="text" class="form-control form-control-sm" id="laundry" name="laundry" list="listLaundry"> -->
               <!-- </div> -->
 
-              <datalist id="listLaundry">
+              <!-- <datalist id="listLaundry">
                 <?php foreach ($laundry as $ln) : ?>
                   <option value="<?= $ln['ld_id'] ?>"><?= $ln['ld_id'].' - '.$ln['ld_nama']; ?></option>
                 <?php endforeach; ?>
-              </datalist>
+              </datalist> -->
 		      	</div>
 
 		      	<div class="form-group">
@@ -51,13 +57,12 @@
 
         	<div class="col-sm-4">
         		<div class="form-group">
-                 <input type="text" class="form-control form-control-sm" id="nama" name="nama" placeholder="masukan nama" list="listCust">
-
-                 <datalist id="listCust">
-                <?php foreach ($customer as $cust) : ?>
-                  <option value="<?= $cust['cust_id'] ?>"><?= $cust['cust_id'].' - '.$cust['cust_nama']; ?></option>
-                <?php endforeach; ?>
-              </datalist>
+				<select class="form-control" name="nama" id="nama">
+								<option value=""></option>
+								<?php foreach ($tukang_gosok as $cust) : ?>
+											<option value="<?= $cust['tg_ld_id'] ?>"><?= $cust['tg_nama']; ?></option>
+											<?php endforeach; ?>
+							</select>
 		      	</div>
 
 		      	<div class="form-group">
@@ -67,25 +72,36 @@
 
 		  	<div class="col-sm-12">
 		  		<button type="submit" class="btn btn-primary">Tambah</button>
-        <a href="<?= base_url('kependudukan'); ?>" class="btn btn-danger">Kembali</a>
+        <!-- <a href="<?= base_url('kependudukan'); ?>" class="btn btn-danger">Kembali</a> -->
 		  	</div>
 		  	</div>
             </form>
 
     <div class="row mt-3">
-						<div class="col-md-8">
+						<div class="col-md-12">
 							<form action="" method="post">
-								<div class="input-group">
-
-									<input type="text" class="form-control form-control-sm" id="sLocn" name="sLocn" list="listLocn" placeholder="pilih Cabang" value="<?php if(!empty($_POST['locn'])) {
-										echo $_POST['locn'];
-									} ?>">
-									<input type="date" class="form-control form-control-sm" name="startDt" style="width:-10%" value="<?= date('Y-m-d') ?>">
-									<input type="date" class="form-control form-control-sm" name="endDt" value="<?= date('Y-m-d') ?>">
-									<input type="text" class="form-control form-control-sm" placeholder="Cari Pelanggan" name="keyword">
-
-									<div class="input-group-append">
-										<button type="submit" class="btn btn-primary">Cari</button>
+							<div class="row">
+									<div class="col-md-3">
+										<select class="form-control" name="sLocn" id="sLocn">
+											<option value="">All</option>
+											<?php foreach ($laundry as $ln) : ?>
+												<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+											<?php endforeach; ?>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<input type="date" class="form-control form-control-sm" name="startDt" style="width:-10%" value="<?= $startDt; ?>">
+									</div>
+									<div class="col-md-2">
+										<input type="date" class="form-control form-control-sm" name="endDt" value="<?= $endDt; ?>">
+									</div>
+									<div class="col-md-2">
+										<input type="text" class="form-control form-control-sm" placeholder="Cari Pelanggan" name="keyword">
+									</div>
+									<div class="col-md-1">
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-primary">Cari</button>
+										</div>
 									</div>
 								</div>
 							</form>
@@ -101,7 +117,7 @@
 				            <th scope="col">Cabang</th>
 				            <th scope="col">Tanggal</th>
 				            <th scope="col">Nama</th>
-				            <th scope="col">Jumlah</th>
+				            <th scope="col">Jumlah (KG)</th>
 				            <th>Aksi</th>
 				          </tr>
 				        </thead>
@@ -115,7 +131,7 @@
 					            <td><?= $hg['hg_tgl']; ?></td>
 					            <td><?= $hg['hg_tg_id']; ?></td>
 					            <td><?= $hg['hg_hasil']; ?></td>
-					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('surat/hapusPS/') . $hg['hg_id']; ?>">hapus</a>
+					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('invoice/hapusHG/') . $hg['hg_id']; ?>">hapus</a>
 					            </td>
 
 					          </tr>
