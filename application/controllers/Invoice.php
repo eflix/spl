@@ -55,6 +55,27 @@ class Invoice extends CI_Controller {
 		$data['invoice'] = $this->invoice->getDataHutang(); 
 		$data['laundry'] = $this->master->getAllLaundry();
 
+		$data['startDt'] = date('Y-m-d');
+		$data['endDt'] =  date('Y-m-d');
+
+		if ($this->input->post('startDt')) {
+			$data['startDt'] = date_format(date_create($this->input->post('startDt')),'Y-m-d');
+			$data['endDt'] = date_format(date_create($this->input->post('endDt')),'Y-m-d');
+		}
+
+		if ($this->input->post('sLocn')) {
+			$data['locn'] = $this->input->post('sLocn');
+		} else {
+			$data['locn'] = '';
+		}
+
+		if ($this->input->post('startDt') || $this->input->post('endDt') || $this->input->post('sLocn')) {
+			$data['invoice'] = $this->invoice->getDataHutangbyParam($data['startDt'],$data['endDt'],$data['locn']); 
+		} else {
+			$data['invoice'] = $this->invoice->getDataHutang();
+		}
+
+
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/topbar', $data);
@@ -63,22 +84,23 @@ class Invoice extends CI_Controller {
 	}
 
 	public function bayarHutang(){
-		// echo $this->input->post('bayar');
-		// echo $this->input->post('invNo');
-		// echo $invNo;
+		$invNo = $this->input->post('invNo');
+		$bayar = (double)$this->input->post('bayar');
 
-		$this->db->query('update fin_invoice set fin_inv_type = "LUNAS", fin_inv_paid_amt = fin_inv_paid_amt + ' . $this->input->post('bayar',true) . ' where fin_inv_no = '. $this->input->post('invNo',true));
-		redirect('hutang');
+		$query = "select * from fin_invoice where fin_inv_no = $invNo";
 
-		// $data[
-		// 	'fin_inv_paid_amt' => ('fin_inv_paid_amt' + $this->input->post('bayar',true))
-		// ];
+		$invoice = $this->db->query($query)->row();
 
-		// $this->db->where('fin_inv_no',$invNo);
-		// $this->db->update('fin_inv_no',$data);
+		$totPaid = ((double)$invoice->fin_inv_paid_amt+$bayar);
 
+		$status = 'HUTANG';
+		if ($totPaid >= (double)$invoice->fin_inv_total_amt) {
+			$status = 'LUNAS';
+		}
 
-		// $this->db->update('fin_invoice','fin_inv_paid_amt' => 'fin_inv_paid_amt' +)
+		$this->db->query("update fin_invoice set fin_inv_type = '$status', fin_inv_paid_amt = $totPaid where fin_inv_no = ". $invNo);
+
+		redirect('invoice/hutang');
 	}
 
 	public function hasilGosok(){

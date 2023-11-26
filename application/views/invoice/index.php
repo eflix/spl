@@ -131,17 +131,6 @@
 										</div>
 									</div>
 								</div>
-
-								<div class="input-group">
-
-									
-
-									
-									
-									
-
-									
-								</div>
 							</form>
 						</div>
 					</div>

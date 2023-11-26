@@ -5,27 +5,32 @@
         <h1 class="h3 mb-4 text-gray-800"><?= $title . ' (Input Pembayaran Hutang)'; ?></h1>
 
 
-    <div class="row mt-3">
-						<div class="col-md-8">
-							<form action="invoice" method="post">
-								<div class="input-group">
-									<input type="date" class="form-control" name="startDt" style="width:-10%" value="<?= date('Y-m-d') ?>">
-									<input type="date" class="form-control" name="endDt" value="<?= date('Y-m-d') ?>">
+    		<div class="row mt-3">
+						<div class="col-md-12">
+							<form action="<?= base_url() ?>/invoice/hutang" method="post">
 
-									<input type="text" class="form-control" id="sLocn" name="sLocn" list="listLocn" placeholder="pilih Cabang" value="<?php if(!empty($_POST['locn'])) {
-										echo $_POST['locn'];
-									} ?>">
-
-						              <datalist id="listLocn">
-						                <?php foreach ($locn as $ln) : ?>
-						                  <option value="<?= $ln['fin_inv_locn'] ?>"><?= $ln['fin_inv_locn']; ?></option>
-						                <?php endforeach; ?>
-						              </datalist>
-
-									<input type="text" class="form-control" placeholder="Cari Pelanggan" name="keyword">
-
-									<div class="input-group-append">
-										<button type="submit" class="btn btn-primary">Cari</button>
+								<div class="row">
+									<div class="col-md-2">
+										<input type="date" class="form-control" name="startDt" style="width:-10%" value="<?= $startDt ?>">
+									</div>
+									<div class="col-md-2">
+										<input type="date" class="form-control" name="endDt" value="<?= $endDt ?>">
+									</div>
+									<div class="col-md-3">
+										<select class="form-control" name="sLocn" id="sLocn">
+											<option value="">All</option>
+											<?php foreach ($laundry as $ln) : ?>
+												<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+											<?php endforeach; ?>
+										</select>
+									</div>
+									<div class="col-md-2">
+										<input type="text" class="form-control" placeholder="Cari Pelanggan" name="keyword">
+									</div>
+									<div class="col-md-1">
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-primary">Cari</button>
+										</div>	
 									</div>
 								</div>
 							</form>
@@ -33,7 +38,7 @@
 					</div>
 
      
-     <table class="table table-hover table-responsive" style="font-size: 12px;">
+     				<table class="table table-hover table-responsive mt-3" style="font-size: 12px;">
 				        <thead>
 				          <tr>
 				            <th scope="col">#</th>
@@ -64,16 +69,11 @@
 					            <form method="post" action="<?= base_url('invoice/bayarHutang') ?>">
 					            	<input type="hidden" name="invNo" value="<?= $i['fin_inv_no']; ?>">
 					            	<td>
-
-					            	<div class="form-group">
-				                 <input type="text" class="form-control form-control-sm" id="bayar" name="bayar" value="<?= $i['fin_inv_total_amt']-$i['fin_inv_paid_amt']; ?>">
-						      	</div>
-
-						      	</td>
-					            
-					            <td><button class="btn btn-warning btn-sm">Bayar</button>
-
-					            </td>
+										<div class="form-group">
+											<input type="text" class="form-control form-control-sm" id="bayar" name="bayar" value="<?= $i['fin_inv_total_amt']-$i['fin_inv_paid_amt']; ?>">
+										</div>
+									</td>
+					            	<td><button class="btn btn-warning btn-sm">Bayar</button></td>
 					            </form>
 					            
 

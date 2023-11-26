@@ -55,7 +55,21 @@ class Invoice_model extends CI_Model {
 	}
 
 	public function getDataHutang(){
-		$query = 'select * from fin_invoice inner join customer on (fin_inv_cust_id = cust_id) where fin_inv_type = "hutang" ';
+		$query = 'select * from fin_invoice inner join customer on (fin_inv_cust_id = cust_id) where fin_inv_type = "hutang" order by fin_inv_dt asc';
+
+		return $this->db->query($query)->result_array();
+	}
+
+	public function getDataHutangbyParam($start_date,$end_date,$locn){
+		$paramLocn = "";
+		$paramPelanggan = "";
+
+		if ($locn != '' || $locn = null) {
+			$paramLocn = " and fin_inv_locn = '$locn'";
+		}
+
+		$query = "select * from fin_invoice inner join customer on (fin_inv_cust_id = cust_id) 
+		where fin_inv_type = 'hutang' and fin_inv_dt >= '$start_date' and fin_inv_dt <= '$end_date' $paramLocn";
 
 		return $this->db->query($query)->result_array();
 	}
