@@ -14,8 +14,17 @@
 
                 </div>
             </div>
-            <div class="col-sm-3">
-              <div class="form-group form-inline">
+            <div class="col-sm-4">
+            <div class="form-group form-inline">
+            <label class="pd-2" for="cb1">Laundry</label>
+            <select class="form-control ml-2" name="laundry1" id="laundry1">
+							<option value=""></option>
+							<?php foreach ($laundry as $ln) : ?>
+								<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+							<?php endforeach; ?>
+						</select>
+            </div>
+              <!-- <div class="form-group form-inline">
                 <label for="cb1">Laundry</label>
                  <input type="text" class="form-control form-control-sm ml-2" id="laundry1" name="laundry1" list="listLaundry">
 
@@ -24,7 +33,7 @@
                   <option value="<?= $ln['ld_id'] ?>"><?= $ln['ld_id'].' - '.$ln['ld_nama']; ?></option>
                 <?php endforeach; ?>
               </datalist>
-            </div>
+              </div> -->
             </div>
             <div class="col-sm-5">
                     <div class="form-group form-inline">

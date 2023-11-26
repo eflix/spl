@@ -13,14 +13,13 @@
 	        	</div>
 	        	<div class="col-sm-4">
 	        		<div class="form-group">
-		      		<input type="text" class="form-control form-control-sm" value="<?= set_value('locn') ?>" id="locn" name="locn" list="listLocn" placeholder="Pilih Cabang">
-
-						              <datalist id="listLocn">
-						                <?php foreach ($laundry as $ln) : ?>
-						                  <option value="<?= $ln['ld_id'] ?>"><?= $ln['ld_id'] . '-' . $ln['ld_nama']; ?></option>
-						                <?php endforeach; ?>
-						              </datalist>
-		      	</div>
+						<select class="form-control" name="locn" id="locn">
+							<option value=""></option>
+							<?php foreach ($laundry as $ln) : ?>
+								<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+							<?php endforeach; ?>
+						</select>
+		      		</div>
 	        	</div>
 	        </div>
 
@@ -60,13 +59,19 @@
 
         	<div class="col-sm-4">
         		<div class="form-group">
-                 <input type="text" class="form-control form-control-sm" id="namaBrg" name="namaBrg" placeholder="nama barang" list="listItems">
+					<select class="form-control" name="namaBrg" id="namaBrg">
+						<option value=""></option>
+						<?php foreach ($items as $i) : ?>
+							<option value="<?= $i['item_id'] ?>"><?=$i['item_nama']; ?></option>
+						<?php endforeach; ?>
+					</select>
+                 <!-- <input type="text" class="form-control form-control-sm" id="namaBrg" name="namaBrg" placeholder="nama barang" list="listItems">
 
                  <datalist id="listItems">
 						                <?php foreach ($items as $i) : ?>
 						                  <option value="<?= $i['item_id'] ?>"><?= $i['item_id'] . '-' . $i['item_nama']; ?></option>
 						                <?php endforeach; ?>
-						              </datalist>
+						              </datalist> -->
 		      	</div>
 
 		      	<div class="form-group form-inline">

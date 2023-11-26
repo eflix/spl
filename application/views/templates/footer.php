@@ -55,6 +55,8 @@
         $('#locn').select2();
         $('#sLocn').select2();
         $('#laundry').select2();
+        $('#laundry1').select2();
+        $('#namaBrg').select2();
 
         $('#nama').select2({
             tags: true
