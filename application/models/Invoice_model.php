@@ -16,16 +16,14 @@ class Invoice_model extends CI_Model {
 			$paramLocn = " and fin_inv_locn = '$locn'";
 		}
 
-		// if ($pelanggan <> '') {
-		// 	$paramPelanggan = " and fin_inv_locn = $pelanggan";
-		// }
-
-		$query = "select * from fin_invoice
+		$query = "select fin_inv_no,fin_inv_dt,fin_inv_type,
+				  case when c.cust_id is null then a.fin_inv_cust_id else c.cust_nama end cust_name,
+				  fin_inv_city,fin_inv_total_amt,fin_inv_paid_amt,fin_inv_notes,b.ld_nama from fin_invoice a
+				  left outer join loundry b on (a.fin_inv_locn = b.ld_id)
+				  left outer join customer c on (a.fin_inv_cust_id = c.cust_id)
 					where fin_inv_dt >= '$start_date' and fin_inv_dt <= '$end_date' $paramLocn ";
 
 		return $this->db->query($query)->result_array();
-		
-		// return $this->db->get_where('fin_invoice',['fin_inv_dt >= ' => $start_date, 'fin_inv_dt <= ' => $end_date])->result_array();
 
 	}
 
@@ -102,8 +100,10 @@ class Invoice_model extends CI_Model {
 			$paramLocn = " and hg_ld_id = '$locn'";
 		}
 
-		$query = "select * from hasil_gosok 
-		where hg_tgl >= '$start_date' and hg_tgl <= '$end_date' $paramLocn";
+		$query = "select a.hg_id,a.hg_tgl,a.hg_hasil,b.ld_nama,c.tg_nama from hasil_gosok a
+		left outer join loundry b on (a.hg_ld_id = b.ld_id)
+		left outer join tukang_gosok c on (a.hg_tg_id = c.tg_id)
+		where a.hg_tgl >= '$start_date' and a.hg_tgl <= '$end_date' $paramLocn";
 
 		return $this->db->query($query)->result_array();
 	}

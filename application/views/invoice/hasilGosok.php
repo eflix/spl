@@ -28,14 +28,6 @@
 								<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
 							<?php endforeach; ?>
 						</select>
-                 <!-- <input type="text" class="form-control form-control-sm" id="laundry" name="laundry" list="listLaundry"> -->
-              <!-- </div> -->
-
-              <!-- <datalist id="listLaundry">
-                <?php foreach ($laundry as $ln) : ?>
-                  <option value="<?= $ln['ld_id'] ?>"><?= $ln['ld_id'].' - '.$ln['ld_nama']; ?></option>
-                <?php endforeach; ?>
-              </datalist> -->
 		      	</div>
 
 		      	<div class="form-group">
@@ -127,9 +119,9 @@
 					          foreach ($hasilGosok as $hg) : ?>
 					          <tr>
 					            <td><?= $j ?></td>
-					            <td><?= $hg['hg_ld_id']; ?></td>
+					            <td><?= $hg['ld_nama']; ?></td>
 					            <td><?= $hg['hg_tgl']; ?></td>
-					            <td><?= $hg['hg_tg_id']; ?></td>
+					            <td><?= $hg['tg_nama']; ?></td>
 					            <td><?= $hg['hg_hasil']; ?></td>
 					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('invoice/hapusHG/') . $hg['hg_id']; ?>">hapus</a>
 					            </td>

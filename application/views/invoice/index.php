@@ -10,7 +10,6 @@
         	<div class="row">
         		<div class="col-sm-1">
         			<div class="form-group">
-						<!-- <?php var_dump($laundry); ?> -->
 		                <label for="tanggal">Cabang</label>
 		            </div>
 	        	</div>
@@ -19,7 +18,7 @@
 						<select class="form-control" name="locn" id="locn">
 							<option value=""></option>
 							<?php foreach ($laundry as $ln) : ?>
-								<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+								<option value="<?= $ln['ld_id'] ?>" <?= ($inp_locn == $ln['ld_id']) ? 'selected' : ''; ?> ><?=$ln['ld_nama']; ?></option>
 							<?php endforeach; ?>
 						</select>
 		      		</div>
@@ -39,13 +38,13 @@
 
 				<div class="col-sm-2">
 					<div class="form-group">
-					<input type="date" class="form-control form-control-sm" id="tanggal" name="tanggal" value="<?= $startDt; ?>">
+					<input type="date" class="form-control form-control-sm" id="tanggal" name="tanggal" value="<?= $tanggal; ?>">
 					</div>
 
 					<div class="form-group">
 					<select class="form-control" id="type" name="type">
-						<option>TUNAI</option>
-						<option>HUTANG</option>
+						<option <?= ($type == 'TUNAI') ? 'selected' : ''; ?> >TUNAI</option>
+						<option <?= ($type == 'HUTANG') ? 'selected' : ''; ?> >HUTANG</option>
 					</select>
 					</div>
 
@@ -158,10 +157,10 @@
 					          foreach ($invoice as $i) : ?>
 					          <tr>
 					            <td><?= $j ?></td>
-					            <td><?= $i['fin_inv_locn']; ?></td>
+					            <td><?= $i['ld_nama']; ?></td>
 					            <td><?= $i['fin_inv_dt']; ?></td>
 					            <td><?= $i['fin_inv_type']; ?></td>
-					            <td><?= $i['fin_inv_cust_id']; ?></td>
+					            <td><?= $i['cust_name']; ?></td>
 					            <td><?= $i['fin_inv_city']; ?></td>
 					            <td><?= $i['fin_inv_total_amt']; ?></td>
 					            <td><?= $i['fin_inv_paid_amt']; ?></td>

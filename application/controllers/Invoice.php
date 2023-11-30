@@ -27,6 +27,24 @@ class Invoice extends CI_Controller {
 			$data['endDt'] = date_format(date_create($this->input->post('endDt')),'Y-m-d');
 		}
 
+		if ($this->input->post('locn')) {
+			$data['inp_locn'] = $this->input->post('locn');
+		} else {
+			$data['inp_locn'] = '';
+		}
+
+		if ($this->input->post('tanggal')) {
+			$data['tanggal'] = $this->input->post('tanggal');
+		} else {
+			$data['tanggal'] = date('Y-m-d');
+		}
+
+		if ($this->input->post('type')) {
+			$data['type'] = $this->input->post('type');
+		} else {
+			$data['type'] = '';
+		}
+
 		$data['locn'] = $this->input->post('sLocn');
 		$data['pelanggan'] = $this->input->post('keyword');
 
