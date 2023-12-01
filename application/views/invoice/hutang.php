@@ -61,7 +61,7 @@
 					            <td><?= $j ?></td>
 					            <td><?= $i['fin_inv_dt']; ?></td>
 					            <td><?= $i['fin_inv_type']; ?></td>
-					            <td><?= $i['cust_nama']; ?></td>
+					            <td><?= $i['cust_name']; ?></td>
 					            <td><?= $i['fin_inv_city']; ?></td>
 					            <td><?= $i['fin_inv_total_amt']; ?></td>
 					            <td><?= $i['fin_inv_paid_amt']; ?></td>

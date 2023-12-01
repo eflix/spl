@@ -46,7 +46,7 @@
 					            <td><?= $j ?></td>
 					            <td><?= $i['item_nama']; ?></td>
 					            <td><?= $i['item_harga']; ?></td>
-					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('masterdata/hapusCustomer/') . $i['item_id']; ?>">hapus</a>
+					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('masterdata/hapusItem/') . $i['item_id']; ?>">hapus</a>
 					            </td>
 
 					          </tr>

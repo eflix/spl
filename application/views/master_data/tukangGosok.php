@@ -23,14 +23,19 @@
       </div>
       <div class="col-sm-5">
               <div class="form-group">
-              <input type="text" class="form-control form-control-sm" id="laundry" name="laundry" list="listLaundry">
+                <select class="form-control ml-2" name="laundry" id="laundry">
+                <option value=""></option>
+                <?php foreach ($laundry as $ln) : ?>
+                  <option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+                <?php endforeach; ?>
+              </select>
               </div>
 
-              <datalist id="listLaundry">
+              <!-- <datalist id="listLaundry">
                 <?php foreach ($laundry as $ln) : ?>
                   <option value="<?= $ln['ld_id'] ?>"><?= $ln['ld_id'].' - '.$ln['ld_nama']; ?></option>
                 <?php endforeach; ?>
-              </datalist>
+              </datalist> -->
 
               <div class="form-group">
               <input type="text" class="form-control form-control-sm" id="nama" name="nama">
@@ -70,13 +75,15 @@
             </form>
 
 
-            <table class="table table-hover table-responsive" style="font-size: 12px;">
+            <table class="table table-hover table-responsive mt-3" style="font-size: 12px;">
 				        <thead>
 				          <tr>
 				            <th scope="col">#</th>
 				            <th scope="col">Nama</th>
+				            <th scope="col">Cabang</th>
 				            <th scope="col">No Telp</th>
 				            <th scope="col">Alamat</th>
+				            <th scope="col">Harga / Kg (Rp)</th>
 				            <th>Aksi</th>
 				          </tr>
 				        </thead>
@@ -87,9 +94,11 @@
 					          <tr>
 					            <td><?= $j ?></td>
 					            <td><?= $tg['tg_nama']; ?></td>
+					            <td><?= $tg['ld_nama']; ?></td>
 					            <td><?= $tg['tg_no_telp']; ?></td>
 					            <td><?= $tg['tg_alamat']; ?></td>
-					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('masterdata/hapusCustomer/') . $tg['tg_id']; ?>">hapus</a>
+					            <td><?= $tg['tg_harga_per_kg']; ?></td>
+					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('masterdata/hapusTG/') . $tg['tg_id']; ?>">hapus</a>
 					            </td>
 
 					          </tr>

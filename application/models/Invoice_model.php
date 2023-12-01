@@ -53,7 +53,10 @@ class Invoice_model extends CI_Model {
 	}
 
 	public function getDataHutang(){
-		$query = 'select * from fin_invoice inner join customer on (fin_inv_cust_id = cust_id) where fin_inv_type = "hutang" order by fin_inv_dt asc';
+		$query = 'select fin_inv_dt,fin_inv_no,fin_inv_type,fin_inv_city,fin_inv_total_amt,fin_inv_paid_amt,fin_inv_notes,
+				case when cust_id is null then fin_inv_cust_id else cust_nama end cust_name	
+				from fin_invoice 
+				left outer join customer on (fin_inv_cust_id = cust_id) where fin_inv_type = "hutang" order by fin_inv_dt asc';
 
 		return $this->db->query($query)->result_array();
 	}

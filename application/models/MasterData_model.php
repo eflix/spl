@@ -31,7 +31,12 @@ class MasterData_model extends CI_Model {
 	}
 
 	public function getAllTukangGosok(){
-		return $this->db->get('tukang_gosok')->result_array();
+		$query = "select * from tukang_gosok
+				inner join loundry on (tg_ld_id = ld_id)";
+
+		return $this->db->query($query)->result_array();
+
+		// return $this->db->get('tukang_gosok')->result_array();
 	}
 
 	public function addTukangGosok(){

@@ -85,6 +85,12 @@ class Masterdata extends CI_Controller {
 		}
 	}
 
+	public function hapusTG($id){
+		$this->db->where('tg_id',$id);
+		$this->db->delete('tukang_gosok');
+		redirect('masterdata/tukangGosok');
+	}
+
 	public function employee(){
 		$data['title'] = 'Karyawan';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
@@ -124,6 +130,12 @@ class Masterdata extends CI_Controller {
 			$this->master->addItems();
 			redirect('masterdata/items');
 		}
+	}
+
+	public function hapusItem($id){
+		$this->db->where('item_id',$id);
+		$this->db->delete('items');
+		redirect('masterdata/items');
 	}
 
 }
