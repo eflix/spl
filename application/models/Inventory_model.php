@@ -4,33 +4,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Inventory_model extends CI_Model {
 
 	public function getAllData(){
-		return $this->db->get('inventory')->result_array();
+		$query = "
+			select * from inventory
+			inner join loundry on (inv_tran_locn = ld_id)
+			inner join items on (inv_tran_item_name = item_id) 
+		";
+
+		return $this->db->query($query)->result_array();
+		// return $this->db->get('inventory')->result_array();
 	}
 
-	public function mngInventory(){
-		return $this->db->query('select inv_tran_item_name, inv_tran_item_uom,sum(sa) as sa, sum(qty_in) as qty_in, sum(qty_out) as qty_out from (
-			SELECT inv_tran_item_name, inv_tran_item_uom, SUM(
-			CASE WHEN inv_tran_in_out = "in"
+	public function mngInventory($locn,$startDt,$endDt){
+		return $this->db->query("
+		select item_nama inv_tran_item_name, inv_tran_item_uom,sum(sa) as sa, sum(qty_in) as qty_in, sum(qty_out) as qty_out from (
+			SELECT inv_tran_locn,inv_tran_item_name, inv_tran_item_uom, SUM(
+			CASE WHEN inv_tran_in_out = 'in'
 			THEN inv_tran_item_qty
 			ELSE inv_tran_item_qty * -1
 			END ) AS sa, 0 AS qty_in, 0 AS qty_out
 			FROM inventory
-			WHERE inv_tran_dt < "2021-12-05"
-			GROUP BY inv_tran_item_name, inv_tran_item_uom
+			WHERE inv_tran_dt < '$startDt' and inv_tran_locn = $locn
+			GROUP BY inv_tran_locn,inv_tran_item_name, inv_tran_item_uom
 			UNION ALL
-			SELECT inv_tran_item_name, inv_tran_item_uom, 0,
-			CASE WHEN inv_tran_in_out = "in"
+			SELECT inv_tran_locn,inv_tran_item_name, inv_tran_item_uom, 0,
+			CASE WHEN inv_tran_in_out = 'in'
 			THEN inv_tran_item_qty
 			ELSE 0
 			END ,
-			CASE WHEN inv_tran_in_out = "out"
+			CASE WHEN inv_tran_in_out = 'out'
 			THEN inv_tran_item_qty
 			ELSE 0
 			END FROM inventory
-			WHERE inv_tran_dt >= "2021-12-05"
-			AND inv_tran_dt <= "2021-12-31"
+			WHERE inv_tran_dt >= '$startDt'
+			AND inv_tran_dt <= '$endDt' and inv_tran_locn = $locn
 			) as mngInv
-			group by inv_tran_item_name, inv_tran_item_uom')->result_array();
+			inner join loundry on (inv_tran_locn = ld_id)
+			inner join items on (inv_tran_item_name = item_id)
+			group by inv_tran_item_name, inv_tran_item_uom
+			")->result_array();
 	}
 
 	public function addStock(){

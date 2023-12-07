@@ -14,7 +14,21 @@ class Inventory extends CI_Controller {
 		$data['title'] = 'Manage Inventory';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 
-		$data['inventory'] = $this->inventory->mngInventory();
+		$data['laundry'] = $this->master->getAllLaundry();
+		$data['startDt'] = date('Y-m-01');
+		$data['endDt'] =  date('Y-m-t');
+		$data['locn'] = 1;
+
+		if ($this->input->post('startDt') && $this->input->post('endDt')) {
+			$data['startDt'] = $this->input->post('startDt');
+			$data['endDt'] =  $this->input->post('endDt');
+		} 
+
+		if ($this->input->post('locn')) {
+			$data['locn'] = $this->input->post('locn');
+		}
+
+		$data['inventory'] = $this->inventory->mngInventory($data['locn'],$data['startDt'],$data['endDt']);
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
@@ -43,6 +57,12 @@ class Inventory extends CI_Controller {
 			$this->inventory->addStock();
 			redirect('inventory/editStock');
 		}
+	}
+
+	public function hapusInventory($id){
+		$this->db->delete('inventory',['inv_tran_no' => $id]);
+
+		redirect('inventory/editStock');
 	}
 
 }

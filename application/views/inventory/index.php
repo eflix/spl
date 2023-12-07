@@ -6,7 +6,35 @@
     <div class="col-sm-12 mb-4">
     	<a href="<?= base_url('inventory/editStock'); ?>" class="btn btn-success btn-sm">Edit Stock</a>
     </div>
-    
+
+	<form method="post" action="">
+		<div class="row">
+		<div class="col-sm-3">
+	        		<div class="form-group">
+						<select class="form-control" name="locn" id="locn">
+							<option value=""></option>
+							<?php foreach ($laundry as $ln) : ?>
+								<option value="<?= $ln['ld_id'] ?>" <?= ($locn == $ln['ld_id']) ? 'selected' : ''; ?>><?=$ln['ld_nama']; ?></option>
+							<?php endforeach; ?>
+						</select>
+		      		</div>
+	        	</div>
+			<div class="col-md-2">
+				<input type="date" class="form-control form-control-sm" name="startDt" style="width:-10%" value="<?= $startDt; ?>">
+			</div>
+			<div class="col-md-2">
+				<input type="date" class="form-control form-control-sm" name="endDt" value="<?= $endDt; ?>">
+			</div>
+			<!-- <div class="col-md-2">
+				<input type="text" class="form-control form-control-sm" placeholder="Cari Barang" name="keyword">
+			</div> -->
+			<div class="col-md-1">
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-primary">Cari</button>
+				</div>
+			</div>
+		</div>
+	</form>    
 
     <table class="table table-hover table-responsive" style="font-size: 12px;">
 				        <thead>
@@ -21,7 +49,7 @@
 				            <!-- <th scope="col">Jumlah</th>
 				            <th scope="col">Bayar</th>
 				            <th>Keterangan</th> -->
-				            <th>Aksi</th>
+				            <!-- <th>Aksi</th> -->
 				          </tr>
 				        </thead>
 				        <tbody>
@@ -35,8 +63,8 @@
 					            <td><?= $i['qty_in']; ?></td>
 					            <td><?= $i['qty_out']; ?></td>
 					            <td><?= $i['sa']+$i['qty_in']-$i['qty_out']; ?></td>
-					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('surat/hapusPS/') . $i['inv_tran_item_name']; ?>">Detail</a>
-					            </td>
+					            <!-- <td><a class="btn btn-danger btn-sm" href="<?= base_url('surat/hapusPS/') . $i['inv_tran_item_name']; ?>">Detail</a>
+					            </td> -->
 
 					          </tr>
 				        	<?php $j++; endforeach; ?>  

@@ -131,14 +131,14 @@
 					          foreach ($inventory as $i) : ?>
 					          <tr>
 					          	<td><?= $j; ?></td>
-					          	<td><?= $i['inv_tran_locn']; ?></td>
+					          	<td><?= $i['ld_nama']; ?></td>
 					          	<td><?= $i['inv_tran_dt']; ?></td>
-					            <td><?= $i['inv_tran_item_name']; ?></td>
+					            <td><?= $i['item_nama']; ?></td>
 					            <td><?= $i['inv_tran_item_uom']; ?></td>
 					            <td><?= $i['inv_tran_item_qty']; ?></td>
 					            <td><?= $i['inv_tran_item_price']; ?></td>
 					            <td><?= $i['inv_tran_notes']; ?></td>
-					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('surat/hapusPS/') . $i['inv_tran_no']; ?>">Hapus</a>
+					            <td><a class="btn btn-danger btn-sm" href="<?= base_url('Inventory/hapusInventory/') . $i['inv_tran_no']; ?>">Hapus</a>
 					            </td>
 
 					          </tr>
