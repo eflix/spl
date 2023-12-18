@@ -81,13 +81,19 @@
             <div class="col-sm-4">
               <div class="form-group form-inline">
                 <label for="cb1">Laundry</label>
-                 <input type="text" class="form-control form-control-sm ml-2" id="laundry2" name="laundry2" list="listLaundry">
+                <select class="form-control ml-2" name="laundry2" id="laundry2">
+							<option value=""></option>
+							<?php foreach ($laundry as $ln) : ?>
+								<option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+							<?php endforeach; ?>
+						</select>
+                 <!-- <input type="text" class="form-control form-control-sm ml-2" id="laundry2" name="laundry2" list="listLaundry"> -->
 
-              <datalist id="listLaundry">
+              <!-- <datalist id="listLaundry">
                 <?php foreach ($laundry as $ln) : ?>
                   <option value="<?= $ln['ld_id'] ?>"><?= $ln['ld_id'].' - '.$ln['ld_nama']; ?></option>
                 <?php endforeach; ?>
-              </datalist>
+              </datalist> -->
             </div>
             </div>
             
@@ -113,13 +119,19 @@
             <div class="col-sm-3">
               <div class="form-group form-inline">
                 <label for="cb1">Laundry</label>
-                 <input type="text" class="form-control form-control-sm ml-2" id="laundry3" name="laundry3" list="listLaundry">
+                <select class="form-control ml-2" name="laundry3MMMMMMMMM" id="laundry3MMMMMMMMM">
+                <option value=""></option>
+                <?php foreach ($laundry as $ln) : ?>
+                  <option value="<?= $ln['ld_id'] ?>"><?=$ln['ld_nama']; ?></option>
+                <?php endforeach; ?>
+              </select>
+                 <!-- <input type="text" class="form-control form-control-sm ml-2" id="laundry3" name="laundry3" list="listLaundry">
 
               <datalist id="listLaundry">
                 <?php foreach ($laundry as $ln) : ?>
                   <option value="<?= $ln['ld_id'] ?>"><?= $ln['ld_id'].' - '.$ln['ld_nama']; ?></option>
                 <?php endforeach; ?>
-              </datalist>
+              </datalist> -->
             </div>
             </div>
           </div>

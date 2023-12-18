@@ -12,6 +12,9 @@ class Admin extends CI_Controller {
 		$data['title'] = 'Dashboard';
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 		//echo "Admin";
+
+		
+
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
 		$this->load->view('templates/topbar', $data);
