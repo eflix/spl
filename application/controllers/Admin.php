@@ -6,6 +6,7 @@ class Admin extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		is_logged_in();
+		$this->load->model('Admin_model','admin');
 	}
 
 	public function index() {
@@ -13,7 +14,9 @@ class Admin extends CI_Controller {
 		$data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
 		//echo "Admin";
 
-		
+		$data['penghasilan'] = $this->admin->getPenghasilan();
+		$data['hutang'] = $this->admin->getHutang();
+		$data['hasil_gosok'] = $this->admin->getHasilGosok();
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);
